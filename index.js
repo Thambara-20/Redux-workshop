@@ -6,6 +6,9 @@ const bindActionCreaters = redux.bindActionCreators
 const CAKE_ORDERED = 'CAKE_ORDERED';
 const CAKE_RESTAKE = 'CAKE_RESTAKE';
 
+const ICECREAM_ORDERED = 'ICECREAM_ORDERED';
+const ICECREAM_RESTAKE = 'ICECREAM_RESTAKE';
+
 const orderCake = () => {
   return {
     type: CAKE_ORDERED,
@@ -13,15 +16,33 @@ const orderCake = () => {
   };
 }
 
-const restakeCake = () => {
+const restakeCake = (quantity=5) => {
     return {
         type: CAKE_RESTAKE,
-        quantity: 5,
+        quantity: quantity,
     };
 }
 
+//----------------------------
+
+const orderIcecream = () => {
+    return {
+      type: ICECREAM_ORDERED,
+      quantity: 1,
+    };
+  }
+
+const restakeIcecream = () => {
+    return {
+        type: ICECREAM_RESTAKE,
+        quantity: 5,
+    };
+}  
+
+
 const initialState = {
     numberOfCakes: 10,
+    numberOfIcecreams: 20,
     };
 
 const reducer = (state = initialState, action) => {
@@ -29,13 +50,24 @@ const reducer = (state = initialState, action) => {
         case CAKE_ORDERED:
         return {
             ...state,
-            numberOfCakes: state.numberOfCakes - action.quantity,
+            numberOfCakes: state.numberOfCakes - action.quantity,  
         };
         case CAKE_RESTAKE:
         return {
             ...state,
             numberOfCakes: state.numberOfCakes + action.quantity,
         };
+        case ICECREAM_ORDERED:
+        return {
+            ...state,
+            numberOfIcecreams: state.numberOfIcecreams - action.quantity,
+        };
+        case ICECREAM_RESTAKE:
+        return {
+            ...state,
+            numberOfIcecreams: state.numberOfIcecreams + action.quantity,
+        };
+
         default:
         return state;
     }
@@ -52,12 +84,18 @@ const unsubscribe = store.subscribe(() => console.log('Updated state', store.get
 const actions = bindActionCreaters({
     orderCake,
     restakeCake,
+
+    orderIcecream,
+    restakeIcecream,
 }, store.dispatch);
 
 actions.orderCake();
 actions.orderCake();
 
-actions.restakeCake();
+actions.orderIcecream();
+actions.orderIcecream();
+
+actions.restakeCake(1);
 
 unsubscribe();
 
