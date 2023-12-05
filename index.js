@@ -1,5 +1,7 @@
 const redux = require('redux');
 const createStore= redux.createStore;
+const bindActionCreaters = redux.bindActionCreators
+
 
 const CAKE_ORDERED = 'CAKE_ORDERED';
 const CAKE_RESTAKE = 'CAKE_RESTAKE';
@@ -45,11 +47,17 @@ console.log('Initial state', store.getState());
 
 const unsubscribe = store.subscribe(() => console.log('Updated state', store.getState()));
 
-store.dispatch(orderCake());
-store.dispatch(orderCake());
-store.dispatch(orderCake());
 
-store.dispatch(restakeCake());
+
+const actions = bindActionCreaters({
+    orderCake,
+    restakeCake,
+}, store.dispatch);
+
+actions.orderCake();
+actions.orderCake();
+
+actions.restakeCake();
 
 unsubscribe();
 
