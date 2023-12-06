@@ -65,6 +65,7 @@ const cakeReducer = (state = initialCakeState, action) => {
                 ...state,
                 numberOfCakes: state.numberOfCakes + action.quantity,
             };
+        
         default:
             return state;
     }
@@ -82,6 +83,15 @@ const icecreamReducer = (state = initialIcecreamState, action) => {
                 ...state,
                 numberOfIcecreams: state.numberOfIcecreams + action.quantity,
             };
+        case CAKE_ORDERED:
+            // return {
+            //     ...state,
+            //     numberOfCakes: state.numberOfCakes - action.quantity, //wrong
+            // };
+               return{
+                     ...state,
+                     numberOfIcecreams: state.numberOfIcecreams - action.quantity, //works but redux toolkit dont let it happen have to use EXTRA reducers mmmm
+               }
         default:
             return state;
     }

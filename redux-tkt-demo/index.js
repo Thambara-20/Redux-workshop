@@ -4,11 +4,13 @@ const iceCreamActions = require("./features/icecream/iceCreamSlice").iceCreamAct
 
 console.log("Initial State: ", store.getState());
 
-const unsubscribe = store.subscribe(() => {});
+const unsubscribe = store.subscribe(() => {}); //logger middleware will log the state changes
 
 store.dispatch(cakeActions.ordered(10));
 store.dispatch(cakeActions.restocked(20));
 
+store.dispatch(iceCreamActions.ordered(5));
+store.dispatch(iceCreamActions.ordered(5));
 store.dispatch(iceCreamActions.ordered(5));
 store.dispatch(iceCreamActions.restocked(10));
 
