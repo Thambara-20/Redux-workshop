@@ -16,12 +16,12 @@ const cakeSlice = createSlice({ // no need a action creator, action object, and 
             state.numOfCakes += action.payload;
         },
     },
-    extraReducers: (builder)=> {
-        builder.addCase(orderedIceCream, (state, action) => {
-            state.numOfCakes -= action.payload;
-        })
+    // extraReducers: (builder)=> {
+    //     builder.addCase(orderedIceCream, (state, action) => {
+    //         state.numOfCakes -= action.payload;
+    //     })
     
-    }
+    // }
 
 })
 
