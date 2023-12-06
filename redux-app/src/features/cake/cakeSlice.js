@@ -1,9 +1,8 @@
-const { iceCreamActions } = require("../icecream/iceCreamSlice");
-
-const createSlice = require("@reduxjs/toolkit").createSlice;
+import { ordered as orderedIceCream } from "../icecream/iceCreamSlice"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { // initial state
-    numOfTickets: 100,
+    numOfCakes: 100,
 }
 
 const cakeSlice = createSlice({ // no need a action creator, action object, and a reducer function
@@ -11,20 +10,20 @@ const cakeSlice = createSlice({ // no need a action creator, action object, and 
     initialState: initialState,
     reducers: {
         ordered: (state, action) => { // reducer function 1
-            state.numOfTickets -= action.payload;
+            state.numOfCakes -= action.payload;
         },
         restocked: (state, action) => { // reducer function 2
-            state.numOfTickets += action.payload;
+            state.numOfCakes += action.payload;
         },
     },
     extraReducers: (builder)=> {
-        builder.addCase(iceCreamActions.ordered, (state, action) => {
-            state.numOfTickets -= action.payload;
+        builder.addCase(orderedIceCream, (state, action) => {
+            state.numOfCakes -= action.payload;
         })
     
     }
 
 })
 
-module.exports = cakeSlice.reducer
-module.exports.cakeActions = cakeSlice.actions
+export default cakeSlice.reducer
+export const{ ordered, restocked } = cakeSlice.actions

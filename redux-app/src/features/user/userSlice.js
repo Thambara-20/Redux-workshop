@@ -1,6 +1,5 @@
-const createSlice = require("@reduxjs/toolkit").createSlice;
-const createAsyncThunk = require("@reduxjs/toolkit").createAsyncThunk;
-const axios = require("axios");
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = { // initial state
     loading: false,
@@ -8,7 +7,7 @@ const initialState = { // initial state
     error: "",
 }
 
-const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
+export const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
 
     return axios.get("https://jsonplaceholder.typicode.com/users").
         then((response) => response.data.map((e) => e.id))
@@ -34,6 +33,5 @@ const userSlice = createSlice({ // no need a action creator, action object, and 
     }
 })
 
-module.exports = userSlice.reducer
-module.exports.fetchUsers = fetchUsers
+export default userSlice.reducer
 
